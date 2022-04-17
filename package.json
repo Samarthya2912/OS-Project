@@ -26,8 +26,8 @@
         "electron:serve": "concurrently -k \"cross-env BROWSER=none yarn start\" \"yarn electron:start\"",
         "electron:build": "yarn build && electron-builder -c.extraMetadata.main=build/main.js",
         "electron:start": "wait-on tcp:3000 && electron .",
-        "electron:package:mac": "yarn build && electron-builder -m -c.extraMetadata.main=build/electron.js",
-        "electron:package:win": "yarn build && electron-builder -w -c.extraMetadata.main=build/electron.js",
+        "electron:package:mac": "yarn build && electron-builder -m -c.extraMetadata.main=build/main.js",
+        "electron:package:win": "yarn build && electron-builder -w -c.extraMetadata.main=build/main.js",
         "electron:package:linux": "yarn build && electron-builder -l -c.extraMetadata.main=build/main.js"
     },
     "build": {
@@ -38,13 +38,16 @@
             "buildResources": "public"
         },
         "mac": {
-            "target": "dmg"
+            "target": "dmg",
+            "icon": "assets/icons/logo.png"
         },
         "win": {
-            "target": "nsis"
+            "target": "nsis",
+            "icon": "assets/icons/logo.png"
         },
         "linux": {
-            "target": "AppImage"
+            "target": "AppImage",
+            "icon": "assets/icons/logo.png"
         }
     },
     "eslintConfig": {
