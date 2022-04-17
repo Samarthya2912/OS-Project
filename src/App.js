@@ -16,8 +16,10 @@ const formatSize = size => {
 }
 
 function App() {
-  const [path, setPath] = useState(app.getAppPath())
 
+
+  const [path, setPath] = useState(app.getAppPath())
+  // const [files, setFiles] = useState([]);
   const files = useMemo(
     () =>
       fs
@@ -44,7 +46,17 @@ function App() {
 
   const [searchString, setSearchString] = useState('')
   const filteredFiles = files.filter(s => s.name.startsWith(searchString))
+  console.log(filteredFiles);
 
+  const deleteFile = (name) => {
+    try {
+      console.log(pathModule.join(path + "/" + name));
+      fs.unlinkSync(pathModule.join(path + "/" + name));
+    }
+    catch (err) {
+      console.log(err);
+    }
+  }
   return (
     <div className="container mt-2">
       <h4>{path}</h4>
@@ -56,7 +68,7 @@ function App() {
           placeholder="File search"
         />
       </div>
-      <FilesViewer files={filteredFiles} onBack={onBack} onOpen={onOpen} />
+      <FilesViewer files={filteredFiles} onBack={onBack} onOpen={onOpen} deleteFile={deleteFile} />
     </div>
   )
 }

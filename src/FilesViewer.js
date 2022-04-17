@@ -1,6 +1,6 @@
 import { IconFolder, IconFile, IconFolderOpen } from './Icons'
-
-export const FilesViewer = ({ files, onBack, onOpen }) => (
+import DeleteButton from './DeleteButton'
+export const FilesViewer = ({ files, onBack, onOpen, deleteFile }) => (
   <table class="table">
     <tbody>
       <tr className="clickable" onClick={onBack}>
@@ -20,6 +20,12 @@ export const FilesViewer = ({ files, onBack, onOpen }) => (
             <td>{name}</td>
             <td>
               <span className="float-end">{size}</span>
+            </td>
+            <td>
+              {
+                !directory &&
+                <DeleteButton name={name} deleteFile={deleteFile} />
+              }
             </td>
           </tr>
         )
